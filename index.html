@@ -99,7 +99,7 @@ input{
 
 <body>
 <audio id="bgMusic" loop>
-    <source src="perfect.mp3" type="audio/mpeg">
+    <source src="Perfect.mp3" type="audio/mpeg">
 </audio>
 <!-- PASSWORD PAGE -->
 <div class="section" id="passwordPage">
@@ -206,7 +206,7 @@ function checkPassword(){
         document.getElementById("passwordPage").style.display="none";
         document.getElementById("letterPage").style.display="flex";
         startTimer();
-        document.getElementById("bgMusic").play();
+        document.getElementById("bgMusic").play().catch(()=>{});
     } else {
         alert("Wrong password… but you’re still my favorite person 💖");
     }
