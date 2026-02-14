@@ -96,7 +96,7 @@ input{
 <body>
 
 <!-- Background Music -->
-<audio id="bgMusic" loop autoplay muted playsinline>
+<audio id="bgMusic" loop preload="auto">
     <source src="Perfect.mp3" type="audio/mpeg">
 </audio>
 
@@ -115,6 +115,11 @@ input{
 
 <!-- LETTER PAGE -->
 <div class="section" id="letterPage">
+
+<!-- NEW MUSIC BUTTON -->
+<button id="playMusicBtn" style="background:white;color:#ff4e8a;font-weight:bold;">
+    Tap to hear what my heart feels 💗
+</button>
 
 <h2>This is how long I’ve been lucky enough to call you mine 💞</h2>
 
@@ -172,21 +177,12 @@ input{
 const startDate=new Date("2023-08-16");
 
 function startExperience(){
+    const input=document.getElementById("passwordInput").value.trim().toLowerCase();
 
-    const input = document.getElementById("passwordInput").value.trim().toLowerCase();
-
-    if(input === "aamna"){
-
-        const music = document.getElementById("bgMusic");
-
-        music.volume = 0.3;
-        music.muted = false;   // unmute after password
-
+    if(input==="aamna"){
         document.getElementById("passwordPage").style.display="none";
         document.getElementById("letterPage").style.display="flex";
-
         startTimer();
-
     } else {
         alert("Wrong password… but you’re still my favorite person 💖");
     }
@@ -195,6 +191,18 @@ function startExperience(){
 function showHint(){
     document.getElementById("hint").style.display="block";
 }
+
+// MUSIC BUTTON LOGIC
+document.addEventListener("DOMContentLoaded", function(){
+    const btn=document.getElementById("playMusicBtn");
+    const music=document.getElementById("bgMusic");
+
+    btn.addEventListener("click", function(){
+        music.volume=0.3;
+        music.play().catch(()=>{});
+        btn.style.display="none";
+    });
+});
 
 function startTimer(){
     setInterval(()=>{
@@ -221,7 +229,6 @@ function moveNo(){
 }
 
 function celebrate(){
-
     const message=document.getElementById("loveMessage");
     const yesBtn=document.getElementById("yes");
 
@@ -239,9 +246,7 @@ function celebrate(){
 }
 
 function startHearts(){
-
     let interval=setInterval(()=>{
-
         const heart=document.createElement("div");
         heart.innerHTML="💖";
         heart.style.position="fixed";
@@ -250,7 +255,6 @@ function startHearts(){
         heart.style.top="100vh";
         heart.style.transition="transform 4s linear, opacity 4s";
         heart.style.opacity="0.8";
-
         document.body.appendChild(heart);
 
         setTimeout(()=>{
@@ -258,10 +262,7 @@ function startHearts(){
             heart.style.opacity="0";
         },10);
 
-        setTimeout(()=>{
-            heart.remove();
-        },4000);
-
+        setTimeout(()=>{heart.remove();},4000);
     },400);
 
     setTimeout(()=>{clearInterval(interval);},6000);
