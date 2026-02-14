@@ -204,18 +204,17 @@ function checkPassword(){
     const input=document.getElementById("passwordInput").value.trim().toLowerCase();
 
     if(input==="aamna"){
-        document.getElementById("passwordPage").style.display="none";
-        document.getElementById("letterPage").style.display="flex";
-        startTimer();
 
         const music = document.getElementById("bgMusic");
 
-        music.muted = true;   
-        music.play().then(()=>{
-            music.muted = false; 
-        }).catch(err=>{
-            console.log("Playback failed:", err);
+        // Play music directly from user click
+        music.play().catch(err=>{
+            console.log("Playback blocked:", err);
         });
+
+        document.getElementById("passwordPage").style.display="none";
+        document.getElementById("letterPage").style.display="flex";
+        startTimer();
 
     } else {
         alert("Wrong password… but you’re still my favorite person 💖");
