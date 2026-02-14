@@ -98,7 +98,7 @@ input{
 </head>
 
 <body>
-<audio id="bgMusic" loop>
+<audio id="bgMusic" loop preload="auto">
     <source src="Perfect.mp3" type="audio/mpeg">
 </audio>
 <!-- PASSWORD PAGE -->
@@ -202,11 +202,21 @@ const startDate=new Date("2023-08-16");
 
 function checkPassword(){
     const input=document.getElementById("passwordInput").value.trim().toLowerCase();
+
     if(input==="aamna"){
         document.getElementById("passwordPage").style.display="none";
         document.getElementById("letterPage").style.display="flex";
         startTimer();
-        document.getElementById("bgMusic").play().catch(()=>{});
+
+        const music = document.getElementById("bgMusic");
+
+        music.muted = true;   
+        music.play().then(()=>{
+            music.muted = false; 
+        }).catch(err=>{
+            console.log("Playback failed:", err);
+        });
+
     } else {
         alert("Wrong password… but you’re still my favorite person 💖");
     }
