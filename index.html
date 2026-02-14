@@ -105,8 +105,7 @@ input{
 <div class="section" id="passwordPage">
     <h1>Enter the password to enter my heart 💖</h1>
     <input type="text" id="passwordInput" placeholder="Password">
-    <button onclick="checkPassword()">Enter 💌</button>
-
+    <button onclick="startExperience()">Enter 💌</button>
     <p onclick="showHint()" style="cursor:pointer;text-decoration:underline;">Take a hint ✨</p>
 
     <div id="hint" style="display:none;">
@@ -200,27 +199,28 @@ I would still choose you.
 
 const startDate=new Date("2023-08-16");
 
-function checkPassword(){
-    const input=document.getElementById("passwordInput").value.trim().toLowerCase();
+function startExperience(){
 
-    if(input==="aamna"){
+    const input = document.getElementById("passwordInput").value.trim().toLowerCase();
+
+    if(input === "aamna"){
 
         const music = document.getElementById("bgMusic");
 
-        // Play music directly from user click
+        // This works because it's DIRECTLY inside click handler
         music.play().catch(err=>{
             console.log("Playback blocked:", err);
         });
 
         document.getElementById("passwordPage").style.display="none";
         document.getElementById("letterPage").style.display="flex";
+
         startTimer();
 
     } else {
         alert("Wrong password… but you’re still my favorite person 💖");
     }
 }
-
 function showHint(){
     document.getElementById("hint").style.display="block";
 }
