@@ -96,7 +96,7 @@ input{
 <body>
 
 <!-- Background Music -->
-<audio id="bgMusic" loop preload="auto">
+<audio id="bgMusic" loop autoplay muted playsinline>
     <source src="Perfect.mp3" type="audio/mpeg">
 </audio>
 
@@ -173,21 +173,14 @@ const startDate=new Date("2023-08-16");
 
 function startExperience(){
 
-    const input=document.getElementById("passwordInput").value.trim().toLowerCase();
+    const input = document.getElementById("passwordInput").value.trim().toLowerCase();
 
-    if(input==="aamna"){
+    if(input === "aamna"){
 
-        const music=document.getElementById("bgMusic");
+        const music = document.getElementById("bgMusic");
 
-        // Mobile-safe autoplay
-        music.volume=0.3;
-        music.muted=true;
-
-        music.play().then(()=>{
-            music.muted=false;
-        }).catch(err=>{
-            console.log("Playback blocked:",err);
-        });
+        music.volume = 0.3;
+        music.muted = false;   // unmute after password
 
         document.getElementById("passwordPage").style.display="none";
         document.getElementById("letterPage").style.display="flex";
