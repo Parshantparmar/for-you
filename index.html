@@ -90,12 +90,24 @@ input{
     margin-top:40px;
     transition:opacity 1.5s ease;
 }
+
+/* Center music intro screen */
+#musicIntro{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+}
+
+#mainLetterContent{
+    display:none;
+}
 </style>
 </head>
 
 <body>
 
-<!-- Background Music -->
 <audio id="bgMusic" loop preload="auto">
     <source src="Perfect.mp3" type="audio/mpeg">
 </audio>
@@ -116,10 +128,15 @@ input{
 <!-- LETTER PAGE -->
 <div class="section" id="letterPage">
 
-<!-- NEW MUSIC BUTTON -->
-<button id="playMusicBtn" style="background:white;color:#ff4e8a;font-weight:bold;">
-    Tap to hear what my heart feels 💗
-</button>
+<!-- MUSIC INTRO CENTERED -->
+<div id="musicIntro">
+    <button id="playMusicBtn" style="background:white;color:#ff4e8a;font-weight:bold;">
+        Tap to hear what my heart feels 💗
+    </button>
+</div>
+
+<!-- ACTUAL LETTER CONTENT -->
+<div id="mainLetterContent">
 
 <h2>This is how long I’ve been lucky enough to call you mine 💞</h2>
 
@@ -163,6 +180,7 @@ input{
 <button onclick="goToFinal()">Continue 💖</button>
 
 </div>
+</div>
 
 <!-- FINAL PAGE -->
 <div class="section" id="finalPage">
@@ -178,7 +196,6 @@ const startDate=new Date("2023-08-16");
 
 function startExperience(){
     const input=document.getElementById("passwordInput").value.trim().toLowerCase();
-
     if(input==="aamna"){
         document.getElementById("passwordPage").style.display="none";
         document.getElementById("letterPage").style.display="flex";
@@ -188,11 +205,6 @@ function startExperience(){
     }
 }
 
-function showHint(){
-    document.getElementById("hint").style.display="block";
-}
-
-// MUSIC BUTTON LOGIC
 document.addEventListener("DOMContentLoaded", function(){
     const btn=document.getElementById("playMusicBtn");
     const music=document.getElementById("bgMusic");
@@ -200,15 +212,20 @@ document.addEventListener("DOMContentLoaded", function(){
     btn.addEventListener("click", function(){
         music.volume=0.3;
         music.play().catch(()=>{});
-        btn.style.display="none";
+
+        document.getElementById("musicIntro").style.display="none";
+        document.getElementById("mainLetterContent").style.display="block";
     });
 });
+
+function showHint(){
+    document.getElementById("hint").style.display="block";
+}
 
 function startTimer(){
     setInterval(()=>{
         const now=new Date();
         const diff=now-startDate;
-
         document.getElementById("days").innerText=Math.floor(diff/(1000*60*60*24));
         document.getElementById("hours").innerText=Math.floor((diff/(1000*60*60))%24);
         document.getElementById("minutes").innerText=Math.floor((diff/(1000*60))%60);
@@ -239,9 +256,7 @@ function celebrate(){
         <h2>I love you so much 💖</h2>
         <p>Thank you for being my Valentine.</p>
     `;
-
     message.style.opacity="1";
-
     startHearts();
 }
 
@@ -256,15 +271,9 @@ function startHearts(){
         heart.style.transition="transform 4s linear, opacity 4s";
         heart.style.opacity="0.8";
         document.body.appendChild(heart);
-
-        setTimeout(()=>{
-            heart.style.transform="translateY(-110vh)";
-            heart.style.opacity="0";
-        },10);
-
+        setTimeout(()=>{heart.style.transform="translateY(-110vh)";heart.style.opacity="0";},10);
         setTimeout(()=>{heart.remove();},4000);
     },400);
-
     setTimeout(()=>{clearInterval(interval);},6000);
 }
 
